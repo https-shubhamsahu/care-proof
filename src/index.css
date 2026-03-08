@@ -24,7 +24,7 @@
     --muted: 30 15% 93%;
     --muted-foreground: 15 6% 40%;
 
-    --accent: 46 65% 55%;
+    --accent: 42 90% 62%;
     --accent-foreground: 20 15% 15%;
 
     --destructive: 0 84% 60%;
@@ -38,7 +38,7 @@
 
     --terracotta: 4 62% 68%;
     --verified: 100 38% 56%;
-    --gold: 46 65% 55%;
+    --gold: 42 90% 62%;
     --care-glow: 4 62% 68%;
 
     --sidebar-background: 30 20% 96%;
@@ -70,7 +70,7 @@
     --muted: 20 10% 15%;
     --muted-foreground: 25 8% 50%;
 
-    --accent: 46 55% 65%;
+    --accent: 42 80% 70%;
     --accent-foreground: 20 20% 7%;
 
     --destructive: 0 84% 60%;
@@ -82,7 +82,7 @@
 
     --terracotta: 4 55% 72%;
     --verified: 100 40% 64%;
-    --gold: 46 55% 65%;
+    --gold: 42 80% 70%;
     --care-glow: 4 55% 72%;
 
     --sidebar-background: 20 15% 9%;
