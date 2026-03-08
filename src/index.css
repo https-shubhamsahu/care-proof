@@ -139,23 +139,18 @@
   }
 
   .text-gradient-primary {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--terracotta)), hsl(var(--gold)));
+    color: hsl(var(--terracotta));
   }
 
   .text-gradient-gold {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--gold)), hsl(var(--terracotta)));
+    color: hsl(var(--gold));
   }
 
   .text-gradient-verified {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--verified)), hsl(46 65% 55%));
+    color: hsl(var(--verified));
   }
 
   .bg-gradient-hero {
-    background: radial-gradient(ellipse at 30% 20%, hsl(var(--terracotta) / 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 80%, hsl(var(--gold) / 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, hsl(var(--verified) / 0.03) 0%, transparent 60%);
+    background-color: hsl(var(--background));
   }
 }
