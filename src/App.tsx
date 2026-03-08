@@ -12,6 +12,7 @@ import Upload from "./pages/Upload";
 import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
 import FutureSecurity from "./pages/FutureSecurity";
+import CommunityImpact from "./pages/CommunityImpact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
