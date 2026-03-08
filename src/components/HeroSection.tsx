@@ -6,22 +6,22 @@ import CareParticles from "@/components/CareParticles";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-background">
+    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-14 sm:pt-16 bg-background">
       <CareParticles />
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-[10%] w-64 h-64 rounded-full bg-primary/5 blur-3xl animate-pulse-glow" />
-        <div className="absolute bottom-1/3 right-[15%] w-48 h-48 rounded-full bg-gold/5 blur-3xl animate-pulse-glow" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-1/4 left-[10%] w-40 sm:w-64 h-40 sm:h-64 rounded-full bg-primary/5 blur-3xl animate-pulse-glow" />
+        <div className="absolute bottom-1/3 right-[15%] w-32 sm:w-48 h-32 sm:h-48 rounded-full bg-gold/5 blur-3xl animate-pulse-glow" style={{ animationDelay: "1s" }} />
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex flex-col items-center gap-8 max-w-3xl mx-auto"
+          className="flex flex-col items-center gap-5 sm:gap-8 max-w-3xl mx-auto"
         >
           <motion.p
-            className="text-sm font-medium tracking-widest uppercase text-primary/70"
+            className="text-xs sm:text-sm font-medium tracking-widest uppercase text-primary/70"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -30,7 +30,7 @@ const HeroSection = () => {
           </motion.p>
 
           <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight font-heading"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight font-heading"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.7 }}
@@ -40,7 +40,7 @@ const HeroSection = () => {
           </motion.h1>
 
           <motion.p
-            className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
@@ -49,12 +49,12 @@ const HeroSection = () => {
           </motion.p>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 mt-4"
+            className="flex flex-col sm:flex-row gap-4 mt-2 sm:mt-4 w-full sm:w-auto px-4 sm:px-0"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 text-base rounded-2xl">
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 text-base rounded-2xl w-full sm:w-auto">
               <Link to="/upload">
                 Get My Free CareScore
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -64,20 +64,20 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Scroll down indicator - anchored to section bottom */}
+      {/* Scroll down indicator */}
       <motion.div
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 cursor-pointer"
+        className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 cursor-pointer"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.8 }}
         onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: "smooth" })}
       >
-        <span className="text-xs text-muted-foreground tracking-widest uppercase">Scroll</span>
+        <span className="text-[10px] sm:text-xs text-muted-foreground tracking-widest uppercase">Scroll</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="w-5 h-5 text-primary/60" />
+          <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-primary/60" />
         </motion.div>
       </motion.div>
     </section>
