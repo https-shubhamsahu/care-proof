@@ -57,6 +57,14 @@ const AnimatedRoutes = () => {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/community"
+            element={
+              <ProtectedRoute>
+                <CommunityImpact />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </motion.div>
