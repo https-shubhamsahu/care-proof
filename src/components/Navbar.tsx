@@ -1,22 +1,23 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
+import { SlideTabs } from "@/components/ui/slide-tabs";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/components/AuthProvider";
 import { LogOut } from "lucide-react";
+
+const navItems = [
+  { label: "Home", value: "/" },
+  { label: "Upload", value: "/upload" },
+  { label: "Dashboard", value: "/dashboard" },
+  { label: "Security", value: "/future-security" },
+  { label: "Community", value: "/community" },
+];
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
-
-  const navItems = [
-    { label: "Home", path: "/" },
-    { label: "Upload Evidence", path: "/upload" },
-    { label: "Dashboard", path: "/dashboard" },
-    { label: "Future Security", path: "/future-security" },
-    { label: "Community", path: "/community" },
-  ];
 
   const handleSignOut = async () => {
     await signOut();
@@ -31,20 +32,12 @@ const Navbar = () => {
           <span className="text-lg font-semibold text-gradient-primary font-heading">CareProof</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`px-4 py-2 rounded-2xl text-sm font-medium transition-colors duration-200 ${
-                location.pathname === item.path
-                  ? "text-primary bg-primary/10"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <div className="hidden lg:block">
+          <SlideTabs
+            tabs={navItems}
+            activeTab={location.pathname}
+            onTabChange={(path) => navigate(path)}
+          />
         </div>
 
         <div className="flex items-center gap-3">
