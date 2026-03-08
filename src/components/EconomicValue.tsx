@@ -26,7 +26,7 @@ const EconomicValue = ({ value = 187500 }: { value?: number }) => {
 
   return (
     <div className="glass-card p-8 flex flex-col items-center glow-gold">
-      <p className="text-xs text-muted-foreground mb-4 uppercase tracking-widest">Estimated Economic Value</p>
+      <p className="text-xs text-muted-foreground mb-4 uppercase tracking-widest font-heading">Your Contribution's Worth</p>
       <div className="flex items-center gap-1">
         <IndianRupee className="w-6 h-6 text-gold" />
         <span className="text-3xl font-semibold text-gradient-gold font-heading">
@@ -34,7 +34,7 @@ const EconomicValue = ({ value = 187500 }: { value?: number }) => {
         </span>
       </div>
       <p className="text-xs text-muted-foreground/60 mt-4 text-center max-w-[240px]">
-        Based on India's replacement cost estimate for caregiving work.
+        The estimated value of your caregiving, based on India's replacement cost for this kind of work.
       </p>
     </div>
   );

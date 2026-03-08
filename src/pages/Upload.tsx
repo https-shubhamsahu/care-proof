@@ -4,6 +4,7 @@ import { HeartHandshake, Upload, FileText, Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import HeartParticles from "@/components/HeartParticles";
 
 interface ExtractedEntry {
   activity: string;
@@ -17,6 +18,7 @@ const Upload_Page = () => {
   const [analyzing, setAnalyzing] = useState(false);
   const [extracted, setExtracted] = useState<ExtractedEntry | null>(null);
   const [confirmed, setConfirmed] = useState(false);
+  const [showHearts, setShowHearts] = useState(false);
 
   const simulateAnalysis = useCallback(() => {
     setAnalyzing(true);
@@ -43,6 +45,14 @@ const Upload_Page = () => {
   const handleFileSelect = useCallback(() => {
     simulateAnalysis();
   }, [simulateAnalysis]);
+
+  const handleConfirm = () => {
+    setShowHearts(true);
+    setTimeout(() => {
+      setConfirmed(true);
+      setShowHearts(false);
+    }, 600);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -97,10 +107,10 @@ const Upload_Page = () => {
                 className="glass-card p-12 text-center glow-primary"
               >
                 <HeartHandshake className="w-12 h-12 text-primary mx-auto mb-4 animate-float" />
-                <p className="font-medium text-primary mb-2">Analyzing your document…</p>
+                <p className="font-medium text-primary mb-2 font-heading">Recognizing your impact…</p>
                 <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  Looking for care signals
+                  Gently uncovering the care within your document
                 </p>
               </motion.div>
             )}
@@ -111,8 +121,10 @@ const Upload_Page = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="glass-card p-8 glow-primary"
+                className="glass-card p-8 glow-primary relative overflow-hidden"
               >
+                <HeartParticles trigger={showHearts} />
+
                 <div className="flex items-center gap-2 text-primary mb-6">
                   <FileText className="w-5 h-5" />
                   <p className="text-sm font-medium">We found a caregiving activity:</p>
@@ -141,11 +153,11 @@ const Upload_Page = () => {
                 </div>
 
                 <Button
-                  className="w-full mt-8 bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl"
-                  onClick={() => setConfirmed(true)}
+                  className="w-full mt-8 bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl relative z-20"
+                  onClick={handleConfirm}
                 >
                   <Check className="w-4 h-4 mr-2" />
-                  Confirm Entry
+                  Confirm Your Contribution
                 </Button>
               </motion.div>
             )}
@@ -160,9 +172,9 @@ const Upload_Page = () => {
                 <div className="w-16 h-16 rounded-full bg-verified/15 flex items-center justify-center mx-auto mb-4">
                   <Check className="w-8 h-8 text-verified" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 font-heading">Your care has been recorded.</h3>
+                <h3 className="text-xl font-semibold mb-2 font-heading">Your care has been recognized.</h3>
                 <p className="text-sm text-muted-foreground mb-6">
-                  Thank you for documenting your work. This contribution matters.
+                  Thank you for sharing your story. Every moment of care shapes the world.
                 </p>
                 <div className="flex gap-3 justify-center">
                   <Button
@@ -170,10 +182,10 @@ const Upload_Page = () => {
                     className="border-primary/30 text-primary hover:bg-primary/10 rounded-2xl"
                     onClick={() => { setExtracted(null); setConfirmed(false); }}
                   >
-                    Upload Another
+                    Share Another Moment
                   </Button>
                   <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl">
-                    <a href="/dashboard">View Dashboard</a>
+                    <a href="/dashboard">View Your Impact</a>
                   </Button>
                 </div>
               </motion.div>
