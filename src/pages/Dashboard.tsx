@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Upload, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CareScoreGauge from "@/components/CareScoreGauge";
@@ -8,8 +11,45 @@ import PortfolioSection from "@/components/PortfolioSection";
 import AffirmationCard from "@/components/AffirmationCard";
 import CareMetrics from "@/components/CareMetrics";
 import RecognitionCard from "@/components/RecognitionCard";
+import { useCareScore, useCareValuation, useCareEntries } from "@/hooks/useCareData";
+import { useAuth } from "@/components/AuthProvider";
+
+const EmptyState = () => (
+  <motion.div
+    className="glass-card p-12 text-center col-span-full"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+  >
+    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+      <Upload className="w-8 h-8 text-primary" />
+    </div>
+    <h2 className="text-xl font-semibold mb-2 font-heading">Your dashboard is ready.</h2>
+    <p className="text-muted-foreground text-sm mb-6 max-w-sm mx-auto leading-relaxed">
+      Upload your first piece of care evidence and we'll calculate your CareScore and economic impact instantly.
+    </p>
+    <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl">
+      <Link to="/upload">Upload Your First Moment</Link>
+    </Button>
+  </motion.div>
+);
 
 const Dashboard = () => {
+  const { user } = useAuth();
+  const { data: scoreData, isLoading: scoreLoading } = useCareScore();
+  const { data: valuationData, isLoading: valuationLoading } = useCareValuation();
+  const { data: entries, isLoading: entriesLoading } = useCareEntries();
+
+  const isLoading = scoreLoading || valuationLoading || entriesLoading;
+  const hasData = (entries?.length ?? 0) > 0;
+
+  const score = scoreData?.total_score ?? 0;
+  const lifetimeValue = valuationData?.lifetime_value_inr ?? 0;
+  const responsibility = scoreData?.responsibility_points ?? 0;
+  const consistency = scoreData?.consistency_points ?? 0;
+  const complexity = scoreData?.complexity_points ?? 0;
+  const totalHours = scoreData?.total_hours ?? 0;
+  const totalEntries = scoreData?.total_entries ?? 0;
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -32,30 +72,55 @@ const Dashboard = () => {
             </p>
           </motion.div>
 
-          {/* Affirmation */}
-          <AffirmationCard />
+          {/* Loading skeleton */}
+          {isLoading && (
+            <div className="flex items-center justify-center py-24">
+              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            </div>
+          )}
 
-          {/* CareScore Gauge + Economic Value */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <CareScoreGauge />
-            <EconomicValue />
-          </div>
+          {/* Empty state */}
+          {!isLoading && !hasData && <EmptyState />}
 
-          {/* Metric Cards */}
-          <div className="mb-6">
-            <CareMetrics />
-          </div>
+          {/* Live dashboard */}
+          {!isLoading && hasData && (
+            <>
+              {/* Affirmation */}
+              <AffirmationCard
+                totalEntries={totalEntries}
+                totalHours={totalHours}
+              />
 
-          {/* Recognition Message */}
-          <div className="mb-6">
-            <RecognitionCard />
-          </div>
+              {/* CareScore Gauge + Economic Value */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <CareScoreGauge score={score} />
+                <EconomicValue value={lifetimeValue} />
+              </div>
 
-          {/* Timeline + Portfolio */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <CareTimeline />
-            <PortfolioSection />
-          </div>
+              {/* Metric Cards */}
+              <div className="mb-6">
+                <CareMetrics
+                  responsibility={responsibility}
+                  consistency={consistency}
+                  complexity={complexity}
+                />
+              </div>
+
+              {/* Recognition Message */}
+              <div className="mb-6">
+                <RecognitionCard
+                  totalEntries={totalEntries}
+                  totalHours={totalHours}
+                />
+              </div>
+
+              {/* Timeline + Portfolio */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <CareTimeline entries={entries ?? []} />
+                <PortfolioSection entries={entries ?? []} />
+              </div>
+            </>
+          )}
         </div>
       </main>
       <Footer />

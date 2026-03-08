@@ -2,12 +2,21 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState } from "react";
 import { IndianRupee } from "lucide-react";
 
-const EconomicValue = ({ value = 187500 }: { value?: number }) => {
+interface EconomicValueProps {
+  value?: number;
+}
+
+const EconomicValue = ({ value = 0 }: EconomicValueProps) => {
   const [displayValue, setDisplayValue] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (hasAnimated) return;
+    // Re-animate whenever value changes
+    setHasAnimated(false);
+  }, [value]);
+
+  useEffect(() => {
+    if (hasAnimated || value === 0) return;
     const timeout = setTimeout(() => {
       setHasAnimated(true);
       const duration = 2000;
@@ -26,7 +35,9 @@ const EconomicValue = ({ value = 187500 }: { value?: number }) => {
 
   return (
     <div className="glass-card p-8 flex flex-col items-center glow-gold">
-      <p className="text-xs text-muted-foreground mb-4 uppercase tracking-widest font-heading">Your Contribution's Worth</p>
+      <p className="text-xs text-muted-foreground mb-4 uppercase tracking-widest font-heading">
+        Your Contribution's Worth
+      </p>
       <div className="flex items-center gap-1">
         <IndianRupee className="w-6 h-6 text-gold" />
         <span className="text-3xl font-semibold text-gradient-gold font-heading">
@@ -34,7 +45,7 @@ const EconomicValue = ({ value = 187500 }: { value?: number }) => {
         </span>
       </div>
       <p className="text-xs text-muted-foreground/60 mt-4 text-center max-w-[240px]">
-        The estimated value of your caregiving, based on India's replacement cost for this kind of work.
+        Lifetime economic value of your caregiving, using India's Replacement Cost Method.
       </p>
     </div>
   );

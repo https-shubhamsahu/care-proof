@@ -2,7 +2,11 @@ import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const CommunityGlobe = () => {
+interface CommunityGlobeProps {
+  totalCaregivers?: number;
+}
+
+const CommunityGlobe = ({ totalCaregivers = 0 }: CommunityGlobeProps) => {
   const [GlobeComponent, setGlobeComponent] = useState<React.ComponentType<any> | null>(null);
 
   useEffect(() => {
@@ -10,6 +14,10 @@ const CommunityGlobe = () => {
       setGlobeComponent(() => mod.DotGlobeHero);
     });
   }, []);
+
+  const displayCount = totalCaregivers > 0
+    ? totalCaregivers.toLocaleString("en-IN")
+    : "—";
 
   return (
     <section className="py-10 sm:py-16 px-4 sm:px-6 bg-background">
@@ -32,7 +40,9 @@ const CommunityGlobe = () => {
             {GlobeComponent ? (
               <GlobeComponent rotationSpeed={0.002} globeRadius={1.1} className="min-h-[250px] sm:min-h-[350px]">
                 <div className="text-center pointer-events-none">
-                  <p className="text-2xl sm:text-3xl font-semibold font-heading text-primary">23,421</p>
+                  <p className="text-2xl sm:text-3xl font-semibold font-heading text-primary">
+                    {displayCount}
+                  </p>
                   <p className="text-xs sm:text-sm text-muted-foreground">caregivers worldwide</p>
                 </div>
               </GlobeComponent>
@@ -43,13 +53,15 @@ const CommunityGlobe = () => {
             )}
           </div>
 
-          <div className="flex items-center gap-2 mt-4 relative z-10">
-            <div className="w-2 h-2 rounded-full bg-verified animate-pulse" />
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              <span className="text-foreground font-semibold">12 caregivers</span> near your city are
-              building their verified portfolios right now.
-            </p>
-          </div>
+          {totalCaregivers > 0 && (
+            <div className="flex items-center gap-2 mt-4 relative z-10">
+              <div className="w-2 h-2 rounded-full bg-verified animate-pulse" />
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                <span className="text-foreground font-semibold">{totalCaregivers}</span> caregivers
+                are building their verified portfolios.
+              </p>
+            </div>
+          )}
         </motion.div>
       </div>
     </section>

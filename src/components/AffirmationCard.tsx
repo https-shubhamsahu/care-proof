@@ -15,11 +15,15 @@ const affirmations = [
   "You don't need a title to be a leader. You already are one.",
 ];
 
-const AffirmationCard = () => {
+interface AffirmationCardProps {
+  totalEntries?: number;
+  totalHours?: number;
+}
+
+const AffirmationCard = ({ totalEntries = 0, totalHours = 0 }: AffirmationCardProps) => {
   const [affirmation, setAffirmation] = useState("");
 
   useEffect(() => {
-    // Pick one based on day of year for consistency throughout the day
     const dayOfYear = Math.floor(
       (Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000
     );
@@ -37,10 +41,18 @@ const AffirmationCard = () => {
         <Sparkles className="w-5 h-5 text-primary" />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-xs font-medium text-primary uppercase tracking-widest mb-1.5 font-heading flex items-center gap-1.5">
-          <Heart className="w-3 h-3" />
-          Note of the Day
-        </p>
+        <div className="flex items-center justify-between mb-1.5 gap-2 flex-wrap">
+          <p className="text-xs font-medium text-primary uppercase tracking-widest font-heading flex items-center gap-1.5">
+            <Heart className="w-3 h-3" />
+            Note of the Day
+          </p>
+          {totalEntries > 0 && (
+            <p className="text-xs text-muted-foreground">
+              <span className="text-foreground font-semibold">{totalEntries}</span> moments logged ·{" "}
+              <span className="text-foreground font-semibold">{totalHours}</span> hrs of care
+            </p>
+          )}
+        </div>
         <p className="text-sm text-muted-foreground leading-relaxed italic">
           "{affirmation}"
         </p>

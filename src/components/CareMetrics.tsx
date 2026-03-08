@@ -1,6 +1,12 @@
 import { motion } from "framer-motion";
 import { Shield, Activity, Brain } from "lucide-react";
 
+interface CareMetricsProps {
+  responsibility?: number;
+  consistency?: number;
+  complexity?: number;
+}
+
 interface MetricCardProps {
   icon: React.ElementType;
   label: string;
@@ -11,29 +17,14 @@ interface MetricCardProps {
 }
 
 const colorMap = {
-  primary: {
-    bg: "bg-primary/10",
-    text: "text-primary",
-    bar: "bg-primary",
-    glow: "hsl(var(--terracotta) / 0.15)",
-  },
-  gold: {
-    bg: "bg-gold/10",
-    text: "text-gold",
-    bar: "bg-gold",
-    glow: "hsl(var(--gold) / 0.15)",
-  },
-  verified: {
-    bg: "bg-verified/10",
-    text: "text-verified",
-    bar: "bg-verified",
-    glow: "hsl(var(--verified) / 0.15)",
-  },
+  primary: { bg: "bg-primary/10", text: "text-primary", bar: "bg-primary" },
+  gold: { bg: "bg-gold/10", text: "text-gold", bar: "bg-gold" },
+  verified: { bg: "bg-verified/10", text: "text-verified", bar: "bg-verified" },
 };
 
 const MetricCard = ({ icon: Icon, label, points, maxPoints, color, delay = 0 }: MetricCardProps) => {
   const colors = colorMap[color];
-  const percentage = (points / maxPoints) * 100;
+  const percentage = maxPoints > 0 ? Math.min((points / maxPoints) * 100, 100) : 0;
 
   return (
     <motion.div
@@ -48,11 +39,9 @@ const MetricCard = ({ icon: Icon, label, points, maxPoints, color, delay = 0 }: 
         </div>
         <div>
           <p className="text-sm font-semibold font-heading">{label}</p>
-          <p className={`text-xs ${colors.text} font-medium`}>{points} points</p>
+          <p className={`text-xs ${colors.text} font-medium`}>{points} pts</p>
         </div>
       </div>
-
-      {/* Progress bar */}
       <div className="h-2 rounded-full bg-muted/50 overflow-hidden">
         <motion.div
           className={`h-full rounded-full ${colors.bar}`}
@@ -65,13 +54,17 @@ const MetricCard = ({ icon: Icon, label, points, maxPoints, color, delay = 0 }: 
   );
 };
 
-const metrics = [
-  { icon: Shield, label: "Responsibility Level", points: 320, maxPoints: 400, color: "primary" as const },
-  { icon: Activity, label: "Consistency", points: 285, maxPoints: 350, color: "gold" as const },
-  { icon: Brain, label: "Care Complexity", points: 237, maxPoints: 250, color: "verified" as const },
-];
+const CareMetrics = ({
+  responsibility = 0,
+  consistency = 0,
+  complexity = 0,
+}: CareMetricsProps) => {
+  const metrics = [
+    { icon: Shield, label: "Responsibility", points: responsibility, maxPoints: 400, color: "primary" as const },
+    { icon: Activity, label: "Consistency", points: consistency, maxPoints: 350, color: "gold" as const },
+    { icon: Brain, label: "Care Complexity", points: complexity, maxPoints: 250, color: "verified" as const },
+  ];
 
-const CareMetrics = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
       {metrics.map((m, i) => (

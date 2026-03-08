@@ -2,11 +2,25 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/AuthProvider";
 import { Navigate } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import logo from "@/assets/logo.png";
 
 const Auth = () => {
   const { user, loading, signInWithGoogle } = useAuth();
+  const [signingIn, setSigningIn] = useState(false);
+
+  const handleSignIn = async () => {
+    setSigningIn(true);
+    try {
+      await signInWithGoogle();
+    } catch (err) {
+      toast.error("Sign-in failed. Please try again.");
+    } finally {
+      setSigningIn(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -37,7 +51,8 @@ const Auth = () => {
           </p>
 
           <Button
-            onClick={signInWithGoogle}
+            onClick={handleSignIn}
+            disabled={signingIn}
             size="lg"
             className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl text-base"
           >

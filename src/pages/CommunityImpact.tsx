@@ -2,24 +2,20 @@ import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import CommunityGlobe from "@/components/CommunityGlobe";
 import {
-  Users,
-  IndianRupee,
-  Clock,
-  BadgeCheck,
-  MapPin,
-  Heart,
+  Users, IndianRupee, Clock, BadgeCheck, MapPin, Heart, Loader2,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useCommunityStats } from "@/hooks/useCareData";
 
-// ── Animated counter (triggers on scroll) ──
+// ── Animated counter (triggers on scroll) ────────────────────────────────────
 const useScrollCounter = (target: number, duration = 2200) => {
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-50px" });
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || target === 0) return;
     const start = Date.now();
     const tick = () => {
       const elapsed = Date.now() - start;
@@ -34,14 +30,9 @@ const useScrollCounter = (target: number, duration = 2200) => {
   return { value, ref };
 };
 
-// ── Impact Counter Card ──
+// ── Impact Counter Card ───────────────────────────────────────────────────────
 const ImpactCounter = ({
-  icon: Icon,
-  label,
-  target,
-  prefix = "",
-  color,
-  delay,
+  icon: Icon, label, target, prefix = "", color, delay,
 }: {
   icon: React.ElementType;
   label: string;
@@ -78,7 +69,7 @@ const ImpactCounter = ({
   );
 };
 
-// ── Caregiver Profile Card ──
+// ── Static spotlight caregivers (anonymised sample profiles) ──────────────────
 const caregivers = [
   { name: "Meera", role: "Elder Caregiver", years: 6, score: 910, city: "Mumbai" },
   { name: "Anita", role: "Special Needs Parent", years: 9, score: 875, city: "Delhi" },
@@ -87,12 +78,8 @@ const caregivers = [
 ];
 
 const CaregiverCard = ({
-  caregiver,
-  delay,
-}: {
-  caregiver: (typeof caregivers)[0];
-  delay: number;
-}) => (
+  caregiver, delay,
+}: { caregiver: typeof caregivers[0]; delay: number }) => (
   <motion.div
     className="glass-card p-6"
     initial={{ opacity: 0, y: 20 }}
@@ -102,7 +89,6 @@ const CaregiverCard = ({
   >
     <div className="flex items-start justify-between mb-4">
       <div className="flex items-center gap-3">
-        {/* Avatar circle with initial */}
         <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center">
           <span className="text-sm font-semibold text-primary font-heading">
             {caregiver.name[0]}
@@ -118,7 +104,6 @@ const CaregiverCard = ({
         <span className="text-xs font-semibold text-verified font-heading">Verified</span>
       </div>
     </div>
-
     <div className="flex items-center gap-6 text-xs text-muted-foreground">
       <div>
         <p className="text-foreground font-semibold text-sm font-heading">{caregiver.score}</p>
@@ -136,14 +121,20 @@ const CaregiverCard = ({
   </motion.div>
 );
 
-
-// ── Main Section ──
+// ── Main Section ──────────────────────────────────────────────────────────────
 const CommunityImpact = () => {
+  const { data: stats, isLoading } = useCommunityStats();
+
+  const totalUsers = stats?.total_users ?? 0;
+  const totalHours = stats?.total_care_hours ?? 0;
+  const totalValue = stats?.total_value_inr ?? 0;
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6">
         <div className="container mx-auto max-w-5xl">
+
           {/* Header */}
           <motion.div
             className="text-center mb-14"
@@ -162,44 +153,26 @@ const CommunityImpact = () => {
               You Are <span className="text-primary">Not Alone</span>
             </h2>
             <p className="text-muted-foreground max-w-lg mx-auto leading-relaxed">
-              Thousands of caregivers are already transforming invisible work into recognized value.
+              Caregivers across India are transforming invisible work into recognized value.
               Every portfolio built strengthens the movement.
             </p>
           </motion.div>
 
           {/* Impact Counters */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 mb-14">
-            <ImpactCounter
-              icon={Users}
-              label="Active Caregivers"
-              target={23421}
-              color="primary"
-              delay={0}
-            />
-            <ImpactCounter
-              icon={IndianRupee}
-              label="Total Care Value Recognized"
-              target={412000000}
-              prefix="₹"
-              color="gold"
-              delay={0.15}
-            />
-            <ImpactCounter
-              icon={Clock}
-              label="Care Hours Logged"
-              target={342000}
-              color="verified"
-              delay={0.3}
-            />
-          </div>
+          {isLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 mb-14">
+              <ImpactCounter icon={Users} label="Active Caregivers" target={totalUsers} color="primary" delay={0} />
+              <ImpactCounter icon={IndianRupee} label="Total Care Value Recognized" target={Math.round(totalValue)} prefix="₹" color="gold" delay={0.15} />
+              <ImpactCounter icon={Clock} label="Care Hours Logged" target={Math.round(totalHours)} color="verified" delay={0.3} />
+            </div>
+          )}
 
           {/* Recognition Stories */}
-          <motion.div
-            className="mb-5"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
+          <motion.div className="mb-5" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
             <div className="flex items-center gap-2 mb-6">
               <BadgeCheck className="w-5 h-5 text-verified" />
               <h3 className="text-xl font-semibold font-heading">Caregivers Leading the Way</h3>
@@ -212,7 +185,7 @@ const CommunityImpact = () => {
           </div>
 
           {/* Community Globe */}
-          <CommunityGlobe />
+          <CommunityGlobe totalCaregivers={totalUsers} />
         </div>
       </main>
       <Footer />
