@@ -1,8 +1,8 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
-import { PerspectiveCamera } from "@react-three/drei";
-import React, { useRef } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { PerspectiveCamera, OrbitControls } from "@react-three/drei";
+import React, { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { cn } from "@/lib/utils";
 
@@ -80,6 +80,7 @@ const DotGlobeHero = React.forwardRef<HTMLDivElement, DotGlobeHeroProps>(
             <ambientLight intensity={0.5} />
             <pointLight position={[10, 10, 10]} intensity={0.8} />
             <Globe rotationSpeed={rotationSpeed} radius={globeRadius} />
+            <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} />
           </Canvas>
         </div>
       </div>
