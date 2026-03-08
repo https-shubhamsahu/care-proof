@@ -142,7 +142,7 @@ const CommunityImpact = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="pt-24 pb-16 px-6">
+      <main className="pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6">
         <div className="container mx-auto max-w-5xl">
           {/* Header */}
           <motion.div
@@ -158,7 +158,7 @@ const CommunityImpact = () => {
                 A growing movement
               </p>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-semibold mb-4 font-heading">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 font-heading">
               You Are <span className="text-primary">Not Alone</span>
             </h2>
             <p className="text-muted-foreground max-w-lg mx-auto leading-relaxed">
@@ -168,7 +168,7 @@ const CommunityImpact = () => {
           </motion.div>
 
           {/* Impact Counters */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 mb-14">
             <ImpactCounter
               icon={Users}
               label="Active Caregivers"

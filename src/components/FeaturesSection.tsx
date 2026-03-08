@@ -36,7 +36,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="py-24 px-6 bg-muted/30">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 bg-muted/30">
       <div className="container mx-auto max-w-5xl">
         <motion.div
           className="text-center mb-16"
@@ -45,12 +45,12 @@ const FeaturesSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-semibold mb-4 font-heading">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-4 font-heading">
             Features that actually <span className="text-verified">matter</span>
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {features.map((f, i) => (
             <motion.div
               key={f.title}

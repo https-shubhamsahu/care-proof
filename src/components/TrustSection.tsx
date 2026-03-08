@@ -10,8 +10,8 @@ const portfolioBullets = [
 
 const TrustSection = () => {
   return (
-    <section className="py-24 px-6 bg-background">
-      <div className="container mx-auto max-w-3xl space-y-20">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 bg-background">
+      <div className="container mx-auto max-w-3xl space-y-12 sm:space-y-20">
         {/* Trust & credibility */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -23,7 +23,7 @@ const TrustSection = () => {
             <div className="w-10 h-10 rounded-2xl bg-verified/10 flex items-center justify-center">
               <ShieldCheck className="w-5 h-5 text-verified" />
             </div>
-            <h2 className="text-2xl font-semibold font-heading">Trust & credibility</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold font-heading">Trust & credibility</h2>
           </div>
           <p className="text-muted-foreground leading-relaxed mb-4">
             You should be skeptical. So are we — that's why CareProof combines automated checks with optional manual verification for high-value claims. We use market wage sources and transparent methodology (Replacement Cost Method) so valuations are defensible.
@@ -44,7 +44,7 @@ const TrustSection = () => {
             <div className="w-10 h-10 rounded-2xl bg-gold/10 flex items-center justify-center">
               <FileText className="w-5 h-5 text-gold" />
             </div>
-            <h2 className="text-2xl font-semibold font-heading">Example portfolio bullets</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold font-heading">Example portfolio bullets</h2>
           </div>
           <p className="text-sm text-muted-foreground mb-6">How this looks to an employer or lender:</p>
           <div className="space-y-3">

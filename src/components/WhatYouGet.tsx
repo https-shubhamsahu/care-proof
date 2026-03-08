@@ -36,7 +36,7 @@ const colorMap: Record<string, { bg: string; text: string }> = {
 
 const WhatYouGet = () => {
   return (
-    <section className="py-24 px-6 bg-muted/30">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 bg-muted/30">
       <div className="container mx-auto max-w-5xl">
         <motion.div
           className="text-center mb-16"
@@ -45,7 +45,7 @@ const WhatYouGet = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-semibold mb-4 font-heading">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-4 font-heading">
             What you actually <span className="text-gold">get</span>
           </h2>
         </motion.div>

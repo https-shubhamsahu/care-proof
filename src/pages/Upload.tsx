@@ -57,14 +57,14 @@ const Upload_Page = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="pt-24 pb-16 px-6">
+      <main className="pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6">
         <div className="container mx-auto max-w-2xl">
           <motion.div
             className="text-center mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-3xl font-semibold mb-3 font-heading">
+            <h1 className="text-2xl sm:text-3xl font-semibold mb-3 font-heading">
               Upload Your <span className="text-gradient-primary">Care Evidence</span>
             </h1>
             <p className="text-muted-foreground">
