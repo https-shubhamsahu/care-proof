@@ -14,6 +14,7 @@ const Navbar = () => {
     { label: "Home", path: "/" },
     { label: "Upload Evidence", path: "/upload" },
     { label: "Dashboard", path: "/dashboard" },
+    { label: "Future Security", path: "/future-security" },
   ];
 
   const handleSignOut = async () => {
