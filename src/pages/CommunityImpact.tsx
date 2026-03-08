@@ -230,7 +230,8 @@ const CommunityMap = () => (
 const CommunityImpact = () => {
   return (
     <div className="min-h-screen bg-background">
-      <main className="py-24 px-6">
+      <Navbar />
+      <main className="pt-24 pb-16 px-6">
         <div className="container mx-auto max-w-5xl">
           {/* Header */}
           <motion.div
