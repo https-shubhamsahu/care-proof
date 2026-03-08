@@ -184,7 +184,7 @@ const FutureSecurity = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="pt-24 pb-16 px-6">
+      <main className="pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6">
         <div className="container mx-auto max-w-5xl">
           {/* Header */}
           <motion.div
@@ -195,7 +195,7 @@ const FutureSecurity = () => {
             <p className="text-xs uppercase tracking-[0.2em] text-primary/70 mb-3 font-heading">
               Your future, secured
             </p>
-            <h1 className="text-3xl sm:text-4xl font-semibold mb-3 font-heading">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-3 font-heading">
               Your Caregiving <span className="text-primary">Impact</span> &{" "}
               <span className="text-gold">Future Security</span>
             </h1>
