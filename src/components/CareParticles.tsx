@@ -12,9 +12,9 @@ interface Particle {
   pulseSpeed: number;
 }
 
-const PARTICLE_COUNT = 48;
-const CONNECTION_DISTANCE = 160;
-const MAX_OPACITY = 0.11;
+const PARTICLE_COUNT = 60;
+const CONNECTION_DISTANCE = 180;
+const MAX_OPACITY = 0.35;
 
 const CareParticles = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
