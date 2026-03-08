@@ -15,6 +15,7 @@ const Navbar = () => {
     { label: "Upload Evidence", path: "/upload" },
     { label: "Dashboard", path: "/dashboard" },
     { label: "Future Security", path: "/future-security" },
+    { label: "Community", path: "/community" },
   ];
 
   const handleSignOut = async () => {
