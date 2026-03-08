@@ -135,96 +135,57 @@ const CaregiverCard = ({
   </motion.div>
 );
 
-// ── Community Map Visualization ──
-const mapDots = [
-  { x: 42, y: 28, size: 6, pulse: true },
-  { x: 55, y: 45, size: 8, pulse: true },
-  { x: 38, y: 55, size: 5, pulse: false },
-  { x: 60, y: 35, size: 7, pulse: true },
-  { x: 48, y: 62, size: 5, pulse: false },
-  { x: 35, y: 40, size: 4, pulse: false },
-  { x: 52, y: 52, size: 6, pulse: true },
-  { x: 45, y: 35, size: 4, pulse: false },
-  { x: 58, y: 58, size: 5, pulse: false },
-  { x: 40, y: 48, size: 3, pulse: false },
-];
+// ── Community Globe Visualization ──
+const CommunityGlobe = () => {
+  // Lazy load to avoid SSR issues
+  const [GlobeComponent, setGlobeComponent] = useState<React.ComponentType<any> | null>(null);
 
-const CommunityMap = () => (
-  <motion.div
-    className="glass-card p-8 relative overflow-hidden"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6, delay: 0.3 }}
-  >
-    {/* Subtle ambient glow */}
-    <div
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-3xl opacity-20"
-      style={{ background: "hsl(var(--verified))" }}
-    />
+  useEffect(() => {
+    import("@/components/ui/globe-hero").then((mod) => {
+      setGlobeComponent(() => mod.DotGlobeHero);
+    });
+  }, []);
 
-    <div className="relative z-10">
-      <div className="flex items-center gap-2 mb-6">
-        <MapPin className="w-5 h-5 text-primary" />
-        <p className="text-sm font-semibold font-heading">Caregiver Community Near You</p>
+  return (
+    <motion.div
+      className="glass-card p-8 relative overflow-hidden"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.3 }}
+    >
+      <div className="relative z-10">
+        <div className="flex items-center gap-2 mb-4">
+          <MapPin className="w-5 h-5 text-primary" />
+          <p className="text-sm font-semibold font-heading">Global Caregiver Network</p>
+        </div>
       </div>
 
-      {/* Abstract map */}
-      <div className="relative w-full h-48 rounded-2xl bg-muted/30 border border-border/30 overflow-hidden mb-5">
-        {/* India-like outline shape (simplified abstract) */}
-        <svg
-          viewBox="0 0 100 80"
-          className="absolute inset-0 w-full h-full"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <path
-            d="M42 10 Q50 8 55 12 Q62 16 60 25 Q63 30 62 38 Q65 42 60 50 Q58 55 55 60 Q52 65 48 68 Q44 65 40 60 Q36 55 35 48 Q32 42 34 35 Q33 28 36 22 Q38 15 42 10Z"
-            fill="hsl(var(--muted))"
-            stroke="hsl(var(--border))"
-            strokeWidth="0.5"
-            opacity="0.5"
-          />
-        </svg>
-
-        {/* Caregiver dots */}
-        {mapDots.map((dot, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              left: `${dot.x}%`,
-              top: `${dot.y}%`,
-              width: dot.size,
-              height: dot.size,
-              background: dot.pulse ? "hsl(var(--verified))" : "hsl(var(--terracotta))",
-            }}
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: dot.pulse ? 0.9 : 0.5, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 + i * 0.08 }}
-          >
-            {dot.pulse && (
-              <motion.div
-                className="absolute inset-0 rounded-full"
-                style={{ background: "hsl(var(--verified))" }}
-                animate={{ scale: [1, 2.5], opacity: [0.4, 0] }}
-                transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-              />
-            )}
-          </motion.div>
-        ))}
+      <div className="relative h-[350px] rounded-2xl overflow-hidden -mx-2">
+        {GlobeComponent ? (
+          <GlobeComponent rotationSpeed={0.002} globeRadius={1.1} className="min-h-[350px]">
+            <div className="text-center pointer-events-none">
+              <p className="text-3xl font-semibold font-heading text-primary">23,421</p>
+              <p className="text-sm text-muted-foreground">caregivers worldwide</p>
+            </div>
+          </GlobeComponent>
+        ) : (
+          <div className="flex items-center justify-center h-full">
+            <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+          </div>
+        )}
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mt-4 relative z-10">
         <div className="w-2 h-2 rounded-full bg-verified animate-pulse" />
         <p className="text-sm text-muted-foreground">
           <span className="text-foreground font-semibold">12 caregivers</span> near your city are
           building their verified portfolios right now.
         </p>
       </div>
-    </div>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
 // ── Main Section ──
 const CommunityImpact = () => {
