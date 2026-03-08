@@ -80,6 +80,7 @@ const DotGlobeHero = React.forwardRef<HTMLDivElement, DotGlobeHeroProps>(
             <ambientLight intensity={0.5} />
             <pointLight position={[10, 10, 10]} intensity={0.8} />
             <Globe rotationSpeed={rotationSpeed} radius={globeRadius} />
+            <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} />
           </Canvas>
         </div>
       </div>
