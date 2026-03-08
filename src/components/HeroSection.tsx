@@ -2,10 +2,12 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import CareParticles from "@/components/CareParticles";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-background">
+      <CareParticles />
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-[10%] w-64 h-64 rounded-full bg-primary/5 blur-3xl animate-pulse-glow" />
         <div className="absolute bottom-1/3 right-[15%] w-48 h-48 rounded-full bg-gold/5 blur-3xl animate-pulse-glow" style={{ animationDelay: "1s" }} />
