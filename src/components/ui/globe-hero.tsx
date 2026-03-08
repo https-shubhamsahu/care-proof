@@ -18,6 +18,7 @@ const Globe: React.FC<{
   radius: number;
 }> = ({ rotationSpeed, radius }) => {
   const groupRef = useRef<THREE.Group>(null!);
+  const colorsRef = useRef<Float32Array | null>(null);
 
   useFrame(() => {
     if (groupRef.current) {
@@ -27,11 +28,33 @@ const Globe: React.FC<{
     }
   });
 
+  const onGeometryUpdate = (geo: THREE.SphereGeometry) => {
+    if (!geo || colorsRef.current) return;
+    const count = geo.attributes.position.count;
+    const colors = new Float32Array(count * 3);
+    const baseColor = new THREE.Color("#E67E76");   // terracotta
+    const careColor = new THREE.Color("#7FB069");    // sage green (caregivers)
+    const accentColor = new THREE.Color("#F5C563");  // warm gold
+
+    for (let i = 0; i < count; i++) {
+      const rand = Math.random();
+      let color: THREE.Color;
+      if (rand < 0.25) color = careColor;
+      else if (rand < 0.35) color = accentColor;
+      else color = baseColor;
+      colors[i * 3] = color.r;
+      colors[i * 3 + 1] = color.g;
+      colors[i * 3 + 2] = color.b;
+    }
+    colorsRef.current = colors;
+    geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+  };
+
   return (
     <group ref={groupRef}>
       <points>
-        <sphereGeometry args={[radius, 48, 48]} />
-        <pointsMaterial size={0.015} color="#E67E76" sizeAttenuation transparent opacity={0.8} />
+        <sphereGeometry args={[radius, 48, 48]} ref={onGeometryUpdate as any} />
+        <pointsMaterial size={0.015} vertexColors sizeAttenuation transparent opacity={0.9} />
       </points>
     </group>
   );
