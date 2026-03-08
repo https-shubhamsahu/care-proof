@@ -8,8 +8,12 @@ const CareScoreGauge = ({ score = 420 }: { score?: number }) => {
 
   return (
     <div className="glass-card p-8 flex flex-col items-center glow-primary">
-      <p className="text-xs text-muted-foreground mb-4 uppercase tracking-widest">Your Care Impact</p>
-      <div className="relative w-36 h-36">
+      <p className="text-xs text-muted-foreground mb-4 uppercase tracking-widest font-heading">Your Care Impact</p>
+      <motion.div
+        className="relative w-36 h-36"
+        animate={{ scale: [1, 1.02, 1] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      >
         <svg className="w-full h-full -rotate-90" viewBox="0 0 128 128">
           <circle cx="64" cy="64" r="58" fill="none" stroke="hsl(var(--border))" strokeWidth="6" />
           <motion.circle
@@ -39,7 +43,7 @@ const CareScoreGauge = ({ score = 420 }: { score?: number }) => {
           </motion.span>
           <span className="text-xs text-muted-foreground">CareScore</span>
         </div>
-      </div>
+      </motion.div>
       <p className="text-xs text-muted-foreground/60 mt-4 text-center max-w-[200px]">
         Your CareScore grows with every documented hour of care.
       </p>

@@ -7,7 +7,7 @@ const PortfolioSection = () => {
     <div className="glass-card p-8">
       <div className="flex items-center gap-2 mb-6">
         <Briefcase className="w-4 h-4 text-gold" />
-        <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground font-heading">Professional View</h3>
+        <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground font-heading">Your Story, Professionally</h3>
       </div>
 
       <motion.div
@@ -19,7 +19,7 @@ const PortfolioSection = () => {
         <h4 className="text-lg font-semibold mb-1 font-heading">Family Care Coordinator</h4>
         <p className="text-sm text-muted-foreground mb-4">Jan 2022 – Dec 2024</p>
         <div className="space-y-2">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Skills Gained</p>
+          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Skills You've Built</p>
           <div className="flex flex-wrap gap-2">
             {["Budget planning", "Healthcare coordination", "Crisis management", "Multi-stakeholder communication"].map((s) => (
               <span key={s} className="text-xs px-3 py-1 rounded-full bg-gold/10 text-gold border border-gold/20">{s}</span>
@@ -35,7 +35,7 @@ const PortfolioSection = () => {
         </Button>
         <Button variant="outline" className="flex-1 border-gold/30 text-gold hover:bg-gold/10 rounded-2xl">
           <Download className="w-4 h-4 mr-2" />
-          Download CareProof Report
+          Download Your CareProof
         </Button>
       </div>
     </div>
