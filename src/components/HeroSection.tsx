@@ -3,6 +3,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import CareParticles from "@/components/CareParticles";
+import logo from "@/assets/logo.png";
 
 const HeroSection = () => {
   return (
