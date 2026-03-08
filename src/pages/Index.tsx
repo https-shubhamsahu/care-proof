@@ -1,7 +1,15 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import WhyItMatters from "@/components/WhyItMatters";
+import ImagineThis from "@/components/ImagineThis";
+import HowItsDifferent from "@/components/HowItsDifferent";
+import WhatYouGet from "@/components/WhatYouGet";
 import HowItWorks from "@/components/HowItWorks";
-import SkillsMapping from "@/components/SkillsMapping";
+import FeaturesSection from "@/components/FeaturesSection";
+import TrustSection from "@/components/TrustSection";
+import EthicalPromise from "@/components/EthicalPromise";
+import FinalCTA from "@/components/FinalCTA";
+import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -9,8 +17,16 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
+      <WhyItMatters />
+      <ImagineThis />
+      <HowItsDifferent />
+      <WhatYouGet />
       <HowItWorks />
-      <SkillsMapping />
+      <FeaturesSection />
+      <TrustSection />
+      <EthicalPromise />
+      <FinalCTA />
+      <FAQSection />
       <Footer />
     </div>
   );
