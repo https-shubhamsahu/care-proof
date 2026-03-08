@@ -261,8 +261,8 @@ const CommunityImpact = () => {
             ))}
           </div>
 
-          {/* Community Map */}
-          <CommunityMap />
+          {/* Community Globe */}
+          <CommunityGlobe />
         </div>
       </main>
       <Footer />
