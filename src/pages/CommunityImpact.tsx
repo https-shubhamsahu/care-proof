@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import CommunityGlobe from "@/components/CommunityGlobe";
 import {
   Users,
   IndianRupee,
@@ -135,57 +136,6 @@ const CaregiverCard = ({
   </motion.div>
 );
 
-// ── Community Globe Visualization ──
-const CommunityGlobe = () => {
-  // Lazy load to avoid SSR issues
-  const [GlobeComponent, setGlobeComponent] = useState<React.ComponentType<any> | null>(null);
-
-  useEffect(() => {
-    import("@/components/ui/globe-hero").then((mod) => {
-      setGlobeComponent(() => mod.DotGlobeHero);
-    });
-  }, []);
-
-  return (
-    <motion.div
-      className="glass-card p-8 relative overflow-hidden"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.3 }}
-    >
-      <div className="relative z-10">
-        <div className="flex items-center gap-2 mb-4">
-          <MapPin className="w-5 h-5 text-primary" />
-          <p className="text-sm font-semibold font-heading">Global Caregiver Network</p>
-        </div>
-      </div>
-
-      <div className="relative h-[350px] rounded-2xl overflow-hidden -mx-2">
-        {GlobeComponent ? (
-          <GlobeComponent rotationSpeed={0.002} globeRadius={1.1} className="min-h-[350px]">
-            <div className="text-center pointer-events-none">
-              <p className="text-3xl font-semibold font-heading text-primary">23,421</p>
-              <p className="text-sm text-muted-foreground">caregivers worldwide</p>
-            </div>
-          </GlobeComponent>
-        ) : (
-          <div className="flex items-center justify-center h-full">
-            <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-          </div>
-        )}
-      </div>
-
-      <div className="flex items-center gap-2 mt-4 relative z-10">
-        <div className="w-2 h-2 rounded-full bg-verified animate-pulse" />
-        <p className="text-sm text-muted-foreground">
-          <span className="text-foreground font-semibold">12 caregivers</span> near your city are
-          building their verified portfolios right now.
-        </p>
-      </div>
-    </motion.div>
-  );
-};
 
 // ── Main Section ──
 const CommunityImpact = () => {
