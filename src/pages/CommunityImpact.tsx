@@ -304,6 +304,7 @@ const CommunityImpact = () => {
           <CommunityMap />
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
