@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Navbar = () => {
   const location = useLocation();
@@ -35,9 +36,12 @@ const Navbar = () => {
           ))}
         </div>
 
-        <Button variant="outline" size="sm" className="border-primary/30 text-primary hover:bg-primary/10">
-          Sign In
-        </Button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <Button variant="outline" size="sm" className="border-primary/30 text-primary hover:bg-primary/10">
+            Sign In
+          </Button>
+        </div>
       </div>
     </nav>
   );
