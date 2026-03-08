@@ -180,7 +180,7 @@ const CareParticles = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
       style={{ opacity: 1 }}
       aria-hidden="true"
     />
