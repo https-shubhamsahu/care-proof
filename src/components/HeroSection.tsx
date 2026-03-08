@@ -21,6 +21,15 @@ const HeroSection = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="flex flex-col items-center gap-5 sm:gap-8 max-w-3xl mx-auto"
         >
+          <motion.img
+            src={logo}
+            alt="CareProof"
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-full"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          />
+
           <motion.p
             className="text-xs sm:text-sm font-medium tracking-widest uppercase text-primary/70"
             initial={{ opacity: 0 }}
