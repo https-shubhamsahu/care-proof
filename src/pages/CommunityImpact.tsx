@@ -7,7 +7,8 @@ import {
   BadgeCheck,
   MapPin,
   Heart,
-} from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 // ── Animated counter (triggers on scroll) ──
 const useScrollCounter = (target: number, duration = 2200) => {
