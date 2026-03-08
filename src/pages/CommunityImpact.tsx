@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import CommunityGlobe from "@/components/CommunityGlobe";
 import {
   Users,
   IndianRupee,
@@ -135,8 +136,6 @@ const CaregiverCard = ({
   </motion.div>
 );
 
-// Re-use shared globe component
-import CommunityGlobeShared from "@/components/CommunityGlobe";
 
 // ── Main Section ──
 const CommunityImpact = () => {
