@@ -17,8 +17,8 @@ const Dashboard = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-3xl font-semibold mb-2">
-              Your <span className="text-gradient-sage">Care Impact</span>
+            <h1 className="text-3xl font-semibold mb-2 font-heading">
+              Your <span className="text-gradient-primary">Care Impact</span>
             </h1>
             <p className="text-muted-foreground">
               A personal growth dashboard for your caregiving journey.

@@ -7,16 +7,16 @@ const PortfolioSection = () => {
     <div className="glass-card p-8">
       <div className="flex items-center gap-2 mb-6">
         <Briefcase className="w-4 h-4 text-gold" />
-        <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Professional View</h3>
+        <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground font-heading">Professional View</h3>
       </div>
 
       <motion.div
-        className="rounded-xl border border-border/30 bg-muted/20 p-6 mb-6"
+        className="rounded-2xl border border-border/30 bg-muted/20 p-6 mb-6"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <h4 className="text-lg font-semibold mb-1">Family Care Coordinator</h4>
+        <h4 className="text-lg font-semibold mb-1 font-heading">Family Care Coordinator</h4>
         <p className="text-sm text-muted-foreground mb-4">Jan 2022 – Dec 2024</p>
         <div className="space-y-2">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Skills Gained</p>
@@ -29,11 +29,11 @@ const PortfolioSection = () => {
       </motion.div>
 
       <div className="flex flex-col sm:flex-row gap-3">
-        <Button variant="outline" className="flex-1 border-primary/30 text-primary hover:bg-primary/10">
+        <Button variant="outline" className="flex-1 border-primary/30 text-primary hover:bg-primary/10 rounded-2xl">
           <FileText className="w-4 h-4 mr-2" />
           Generate Resume Section
         </Button>
-        <Button variant="outline" className="flex-1 border-gold/30 text-gold hover:bg-gold/10">
+        <Button variant="outline" className="flex-1 border-gold/30 text-gold hover:bg-gold/10 rounded-2xl">
           <Download className="w-4 h-4 mr-2" />
           Download CareProof Report
         </Button>

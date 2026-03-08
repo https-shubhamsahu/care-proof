@@ -10,7 +10,7 @@ const entries = [
 const CareTimeline = () => {
   return (
     <div className="glass-card p-8">
-      <h3 className="text-sm font-semibold mb-6 uppercase tracking-widest text-muted-foreground">Care Timeline</h3>
+      <h3 className="text-sm font-semibold mb-6 uppercase tracking-widest text-muted-foreground font-heading">Care Timeline</h3>
       <div className="space-y-6">
         {entries.map((entry, i) => (
           <motion.div
@@ -22,8 +22,8 @@ const CareTimeline = () => {
             transition={{ delay: i * 0.15 }}
           >
             <div className="flex flex-col items-center">
-              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Check className="w-4 h-4 text-primary" />
+              <div className="w-8 h-8 rounded-full bg-verified/15 flex items-center justify-center flex-shrink-0">
+                <Check className="w-4 h-4 text-verified" />
               </div>
               {i < entries.length - 1 && <div className="w-px flex-1 bg-border/50 mt-2" />}
             </div>
@@ -32,7 +32,7 @@ const CareTimeline = () => {
               <p className="font-medium text-sm mb-2">{entry.activity}</p>
               <div className="flex flex-wrap gap-1.5">
                 {entry.skills.map((s) => (
-                  <span key={s} className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary/80">{s}</span>
+                  <span key={s} className="text-xs px-2 py-0.5 rounded-full bg-verified/10 text-verified">{s}</span>
                 ))}
               </div>
             </div>

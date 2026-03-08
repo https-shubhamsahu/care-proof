@@ -54,8 +54,8 @@ const Upload_Page = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-3xl font-semibold mb-3">
-              Upload Your <span className="text-gradient-sage">Care Evidence</span>
+            <h1 className="text-3xl font-semibold mb-3 font-heading">
+              Upload Your <span className="text-gradient-primary">Care Evidence</span>
             </h1>
             <p className="text-muted-foreground">
               Place something meaningful into this trusted space.
@@ -70,7 +70,7 @@ const Upload_Page = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 className={`glass-card p-12 border-2 border-dashed transition-all duration-300 cursor-pointer text-center ${
-                  dragOver ? "border-primary/60 bg-primary/5 glow-sage" : "border-border/40 hover:border-primary/30"
+                  dragOver ? "border-verified/60 bg-verified/5 glow-verified" : "border-primary/20 hover:border-primary/40"
                 }`}
                 onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
                 onDragLeave={() => setDragOver(false)}
@@ -94,7 +94,7 @@ const Upload_Page = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="glass-card p-12 text-center glow-sage"
+                className="glass-card p-12 text-center glow-primary"
               >
                 <HeartHandshake className="w-12 h-12 text-primary mx-auto mb-4 animate-float" />
                 <p className="font-medium text-primary mb-2">Analyzing your document…</p>
@@ -111,7 +111,7 @@ const Upload_Page = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="glass-card p-8 glow-sage"
+                className="glass-card p-8 glow-primary"
               >
                 <div className="flex items-center gap-2 text-primary mb-6">
                   <FileText className="w-5 h-5" />
@@ -119,7 +119,7 @@ const Upload_Page = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-gradient-sage">{extracted.activity}</h3>
+                  <h3 className="text-xl font-semibold text-gradient-primary font-heading">{extracted.activity}</h3>
                   <div className="flex gap-6 text-sm text-muted-foreground">
                     <span>Date: {extracted.date}</span>
                     <span>Estimated Time: {extracted.hours}</span>
@@ -141,7 +141,7 @@ const Upload_Page = () => {
                 </div>
 
                 <Button
-                  className="w-full mt-8 bg-primary text-primary-foreground hover:bg-primary/90"
+                  className="w-full mt-8 bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl"
                   onClick={() => setConfirmed(true)}
                 >
                   <Check className="w-4 h-4 mr-2" />
@@ -155,24 +155,24 @@ const Upload_Page = () => {
                 key="confirmed"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="glass-card p-12 text-center glow-sage"
+                className="glass-card p-12 text-center glow-verified"
               >
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <Check className="w-8 h-8 text-primary" />
+                <div className="w-16 h-16 rounded-full bg-verified/15 flex items-center justify-center mx-auto mb-4">
+                  <Check className="w-8 h-8 text-verified" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Your care has been recorded.</h3>
+                <h3 className="text-xl font-semibold mb-2 font-heading">Your care has been recorded.</h3>
                 <p className="text-sm text-muted-foreground mb-6">
                   Thank you for documenting your work. This contribution matters.
                 </p>
                 <div className="flex gap-3 justify-center">
                   <Button
                     variant="outline"
-                    className="border-primary/30 text-primary hover:bg-primary/10"
+                    className="border-primary/30 text-primary hover:bg-primary/10 rounded-2xl"
                     onClick={() => { setExtracted(null); setConfirmed(false); }}
                   >
                     Upload Another
                   </Button>
-                  <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+                  <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl">
                     <a href="/dashboard">View Dashboard</a>
                   </Button>
                 </div>

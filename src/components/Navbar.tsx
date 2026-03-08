@@ -17,7 +17,7 @@ const Navbar = () => {
       <div className="container mx-auto flex h-16 items-center justify-between px-6">
         <Link to="/" className="flex items-center gap-3">
           <img src={logo} alt="CareProof" className="h-9 w-9 rounded-full" />
-          <span className="text-lg font-semibold text-gradient-sage">CareProof</span>
+          <span className="text-lg font-semibold text-gradient-primary font-heading">CareProof</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-1">
@@ -25,7 +25,7 @@ const Navbar = () => {
             <Link
               key={item.path}
               to={item.path}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
+              className={`px-4 py-2 rounded-2xl text-sm font-medium transition-colors duration-200 ${
                 location.pathname === item.path
                   ? "text-primary bg-primary/10"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -38,7 +38,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <Button variant="outline" size="sm" className="border-primary/30 text-primary hover:bg-primary/10">
+          <Button variant="outline" size="sm" className="border-primary/30 text-primary hover:bg-primary/10 rounded-2xl">
             Sign In
           </Button>
         </div>

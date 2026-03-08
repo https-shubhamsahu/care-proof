@@ -29,7 +29,7 @@ const EconomicValue = ({ value = 187500 }: { value?: number }) => {
       <p className="text-xs text-muted-foreground mb-4 uppercase tracking-widest">Estimated Economic Value</p>
       <div className="flex items-center gap-1">
         <IndianRupee className="w-6 h-6 text-gold" />
-        <span className="text-3xl font-semibold text-gradient-gold">
+        <span className="text-3xl font-semibold text-gradient-gold font-heading">
           {displayValue.toLocaleString("en-IN")}
         </span>
       </div>
