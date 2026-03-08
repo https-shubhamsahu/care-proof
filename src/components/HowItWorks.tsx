@@ -35,8 +35,8 @@ const HowItWorks = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-semibold mb-4">
-            How <span className="text-gradient-sage">CareProof</span> Works
+          <h2 className="text-3xl font-semibold mb-4 font-heading">
+            How <span className="text-gradient-primary">CareProof</span> Works
           </h2>
           <p className="text-muted-foreground max-w-lg mx-auto">
             Four gentle steps to transform invisible care into visible, recognized experience.
@@ -53,11 +53,11 @@ const HowItWorks = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
                 <step.icon className="w-6 h-6 text-primary" />
               </div>
               <p className="text-xs font-medium text-muted-foreground mb-2">Step {i + 1}</p>
-              <h3 className="font-semibold mb-2">{step.title}</h3>
+              <h3 className="font-semibold mb-2 font-heading">{step.title}</h3>
               <p className="text-sm text-muted-foreground">{step.description}</p>
             </motion.div>
           ))}

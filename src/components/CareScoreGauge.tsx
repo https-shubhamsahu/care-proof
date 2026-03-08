@@ -7,7 +7,7 @@ const CareScoreGauge = ({ score = 420 }: { score?: number }) => {
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div className="glass-card p-8 flex flex-col items-center glow-sage">
+    <div className="glass-card p-8 flex flex-col items-center glow-primary">
       <p className="text-xs text-muted-foreground mb-4 uppercase tracking-widest">Your Care Impact</p>
       <div className="relative w-36 h-36">
         <svg className="w-full h-full -rotate-90" viewBox="0 0 128 128">
@@ -17,7 +17,7 @@ const CareScoreGauge = ({ score = 420 }: { score?: number }) => {
             cy="64"
             r="58"
             fill="none"
-            stroke="hsl(var(--sage))"
+            stroke="hsl(var(--terracotta))"
             strokeWidth="6"
             strokeLinecap="round"
             strokeDasharray={circumference}
@@ -29,7 +29,7 @@ const CareScoreGauge = ({ score = 420 }: { score?: number }) => {
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <motion.span
-            className="text-3xl font-semibold text-gradient-sage"
+            className="text-3xl font-semibold text-gradient-primary font-heading"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

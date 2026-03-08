@@ -18,7 +18,7 @@ const SkillsMapping = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-semibold mb-4">
+          <h2 className="text-3xl font-semibold mb-4 font-heading">
             Care is <span className="text-gradient-gold">Professional Work</span>
           </h2>
           <p className="text-muted-foreground max-w-lg mx-auto">
