@@ -34,7 +34,7 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="py-24 px-6 bg-background">
+    <section id="how-it-works" className="py-16 sm:py-24 px-4 sm:px-6 bg-background">
       <div className="container mx-auto max-w-3xl">
         <motion.div
           className="text-center mb-16"
@@ -43,7 +43,7 @@ const HowItWorks = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-semibold mb-4 font-heading">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-4 font-heading">
             How it <span className="text-primary">works</span>
           </h2>
           <p className="text-muted-foreground">

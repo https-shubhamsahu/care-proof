@@ -36,7 +36,7 @@ const colorMap: Record<string, { bg: string; text: string }> = {
 
 const HowItsDifferent = () => {
   return (
-    <section className="py-24 px-6 bg-background">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 bg-background">
       <div className="container mx-auto max-w-3xl">
         <motion.div
           className="text-center mb-16"
@@ -45,7 +45,7 @@ const HowItsDifferent = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-semibold mb-4 font-heading">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-4 font-heading">
             Why CareProof is <span className="text-primary">different</span>
           </h2>
           <p className="text-muted-foreground">

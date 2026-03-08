@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const FinalCTA = () => {
   return (
-    <section className="py-24 px-6 bg-background">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 bg-background">
       <div className="container mx-auto max-w-2xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -14,7 +14,7 @@ const FinalCTA = () => {
           transition={{ duration: 0.6 }}
           className="space-y-6"
         >
-          <h2 className="text-3xl font-semibold font-heading">
+          <h2 className="text-2xl sm:text-3xl font-semibold font-heading">
             Ready to make your care <span className="text-primary">count</span>?
           </h2>
 

@@ -31,7 +31,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-24 px-6 bg-muted/30">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 bg-muted/30">
       <div className="container mx-auto max-w-2xl">
         <motion.div
           className="text-center mb-12"
@@ -40,7 +40,7 @@ const FAQSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-semibold mb-4 font-heading">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-4 font-heading">
             Frequently asked <span className="text-primary">questions</span>
           </h2>
         </motion.div>

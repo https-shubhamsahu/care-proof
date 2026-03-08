@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const WhyItMatters = () => {
   return (
-    <section className="py-24 px-6 bg-background">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 bg-background">
       <div className="container mx-auto max-w-3xl">
         {/* Why this matters */}
         <motion.div
@@ -15,7 +15,7 @@ const WhyItMatters = () => {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <h2 className="text-3xl font-semibold mb-6 font-heading">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-6 font-heading">
             Why this matters <span className="text-muted-foreground text-lg font-normal">(fast)</span>
           </h2>
           <p className="text-muted-foreground leading-relaxed mb-6">
