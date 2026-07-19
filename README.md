@@ -15,7 +15,7 @@
   <img alt="Vite" src="https://img.shields.io/badge/Vite-5-646CFF?style=flat-square&logo=vite&logoColor=white" />
   <img alt="Supabase" src="https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat-square&logo=supabase&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind-CSS-0EA5E9?style=flat-square&logo=tailwindcss&logoColor=white" />
-  <img alt="License" src="https://img.shields.io/badge/License-MIT-gold?style=flat-square" />
+  <img alt="Tests" src="https://img.shields.io/badge/Tests-Vitest-6E9F18?style=flat-square&logo=vitest&logoColor=white" />
 </p>
 
 ---
@@ -264,7 +264,7 @@ Please follow the existing code style (TypeScript strict, Tailwind classes over 
 
 ## 📄 License
 
-MIT © CareProof Team
+No `LICENSE` file is currently present in this repository. Add one (e.g. MIT) to make usage terms explicit.
 
 ---
 
