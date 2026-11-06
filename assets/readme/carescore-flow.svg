@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="t d">
+  <title id="t">How three uploads become a CareScore</title>
+  <desc id="d">Worked example. Three files are classified into care entries: discharge_summary.pdf becomes Medical and Hospital Care Coordination, 6 hours, February. school_report_card.pdf becomes Child Education Support, 3 hours, March. electricity_bill.jpg becomes Household Financial Management, 2 hours, March. The Postgres trigger then computes responsibility 19 of 400, consistency 90 of 350 and complexity 160 of 250, a CareScore of 269 out of 1000, and a value of 11 hours times 450 rupees, 4,950 rupees.</desc>
+  <style>
+    .r1,.r2,.r3,.note,.v,.total{animation:6.5s cubic-bezier(.2,.7,.2,1) infinite}
+    .bar{transform-box:fill-box;transform-origin:0 50%;animation:grow 6.5s cubic-bezier(.2,.7,.2,1) infinite}
+    .r1{animation-name:r1} .r2{animation-name:r2} .r3{animation-name:r3}
+    .note{animation-name:note} .v{animation-name:vals} .total{animation-name:total}
+    @keyframes r1{0%,3%{opacity:0;transform:translateX(-28px)}13%,90%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+    @keyframes r2{0%,11%{opacity:0;transform:translateX(-28px)}21%,90%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+    @keyframes r3{0%,19%{opacity:0;transform:translateX(-28px)}29%,90%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+    @keyframes note{0%,29%{opacity:0}35%,90%{opacity:1}97%,100%{opacity:0}}
+    @keyframes grow{0%,35%{transform:scaleX(0)}52%,90%{transform:scaleX(1)}97%,100%{transform:scaleX(0)}}
+    @keyframes vals{0%,44%{opacity:0}52%,90%{opacity:1}97%,100%{opacity:0}}
+    @keyframes total{0%,52%{opacity:0}60%,90%{opacity:1}97%,100%{opacity:0}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+  </style>
+  <rect width="1200" height="560" rx="24" fill="#15110e"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+    <text x="48" y="64" font-size="22" fill="#eee8e2" font-weight="600">Example: three uploads</text>
+    <text x="48" y="100" font-size="18" fill="#b4a79e" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans Mono', monospace">documentAnalysis.ts → care_entries</text>
+    <text x="652" y="64" font-size="22" fill="#eee8e2" font-weight="600">What the trigger writes</text>
+    <text x="652" y="100" font-size="18" fill="#b4a79e" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans Mono', monospace">recalculate_user_metrics()</text>
+    
+    <g class="r1">
+      <rect x="48" y="132" width="548" height="76" rx="14" fill="#201b18" stroke="#3a302a"/>
+      <text x="70" y="162" font-size="18" fill="#b4a79e" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans Mono', monospace">discharge_summary.pdf</text>
+      <text x="70" y="190" font-size="20" fill="#eee8e2">Medical &amp; Hospital Care Coordination</text>
+      <text x="574" y="168" font-size="24" font-weight="700" fill="#f0cb75" text-anchor="end">6 h</text>
+      <text x="574" y="192" font-size="18" fill="#b4a79e" text-anchor="end">Feb</text>
+    </g>
+    <g class="r2">
+      <rect x="48" y="220" width="548" height="76" rx="14" fill="#201b18" stroke="#3a302a"/>
+      <text x="70" y="250" font-size="18" fill="#b4a79e" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans Mono', monospace">school_report_card.pdf</text>
+      <text x="70" y="278" font-size="20" fill="#eee8e2">Child Education Support</text>
+      <text x="574" y="256" font-size="24" font-weight="700" fill="#f0cb75" text-anchor="end">3 h</text>
+      <text x="574" y="280" font-size="18" fill="#b4a79e" text-anchor="end">Mar</text>
+    </g>
+    <g class="r3">
+      <rect x="48" y="308" width="548" height="76" rx="14" fill="#201b18" stroke="#3a302a"/>
+      <text x="70" y="338" font-size="18" fill="#b4a79e" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans Mono', monospace">electricity_bill.jpg</text>
+      <text x="70" y="366" font-size="20" fill="#eee8e2">Household Financial Management</text>
+      <text x="574" y="344" font-size="24" font-weight="700" fill="#f0cb75" text-anchor="end">2 h</text>
+      <text x="574" y="368" font-size="18" fill="#b4a79e" text-anchor="end">Mar</text>
+    </g>
+    <text class="note" x="48" y="424" font-size="18" fill="#b4a79e">11 h across 2 months · 9 skills tagged, 8 distinct</text>
+    <path d="M612 274 L636 274" stroke="#b4a79e" stroke-width="2"/>
+    <path d="M630 268 L638 274 L630 280" stroke="#b4a79e" stroke-width="2" fill="none"/>
+    
+    <text x="652" y="150" font-size="21" font-weight="600" fill="#eee8e2">Responsibility</text>
+    <text class="v" x="1152" y="150" font-size="22" font-weight="700" fill="#e0918a" text-anchor="end">19<tspan fill="#b4a79e" font-weight="400"> / 400</tspan></text>
+    <rect x="652" y="164" width="500.0" height="12" rx="6" fill="#201b18"/>
+    <rect class="bar" x="652" y="164" width="23.8" height="12" rx="6" fill="#e0918a"/>
+    <text x="652" y="204" font-size="18" fill="#b4a79e" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans Mono', monospace">floor(11 h × 1.8), cap 400</text>
+    <text x="652" y="242" font-size="21" font-weight="600" fill="#eee8e2">Consistency</text>
+    <text class="v" x="1152" y="242" font-size="22" font-weight="700" fill="#f0cb75" text-anchor="end">90<tspan fill="#b4a79e" font-weight="400"> / 350</tspan></text>
+    <rect x="652" y="256" width="437.5" height="12" rx="6" fill="#201b18"/>
+    <rect class="bar" x="652" y="256" width="112.5" height="12" rx="6" fill="#f0cb75"/>
+    <text x="652" y="296" font-size="18" fill="#b4a79e" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans Mono', monospace">2 months × 45, cap 350</text>
+    <text x="652" y="334" font-size="21" font-weight="600" fill="#eee8e2">Complexity</text>
+    <text class="v" x="1152" y="334" font-size="22" font-weight="700" fill="#97c87e" text-anchor="end">160<tspan fill="#b4a79e" font-weight="400"> / 250</tspan></text>
+    <rect x="652" y="348" width="312.5" height="12" rx="6" fill="#201b18"/>
+    <rect class="bar" x="652" y="348" width="200.0" height="12" rx="6" fill="#97c87e"/>
+    <text x="652" y="388" font-size="18" fill="#b4a79e" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans Mono', monospace">8 skills × 20, cap 250</text>
+    <line x1="48" y1="460" x2="1152" y2="460" stroke="#3a302a" stroke-width="2"/>
+    <g class="total">
+      <text x="48" y="516" font-size="22" fill="#eee8e2">CareScore</text>
+      <text x="168" y="520" font-size="46" font-weight="700" fill="#e0918a">269</text>
+      <text x="262" y="516" font-size="20" fill="#b4a79e">/ 1000</text>
+      <text x="1152" y="520" font-size="46" font-weight="700" fill="#f0cb75" text-anchor="end">₹4,950</text>
+      <text x="930" y="516" font-size="20" fill="#b4a79e" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans Mono', monospace">11 h × ₹450 =</text>
+    </g>
+  </g>
+</svg>

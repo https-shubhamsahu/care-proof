@@ -1,118 +1,66 @@
 <p align="center">
-  <img src="src/assets/logo.png" width="80" alt="CareProof Logo" style="border-radius: 50%;" />
-</p>
-
-<h1 align="center">CareProof</h1>
-
-<p align="center">
-  <strong>Turn invisible caregiving into verified economic power.</strong><br/>
-  A platform that recognises, quantifies, and certifies unpaid caregiving work — producing a CareScore, economic valuation, and professional portfolio that lenders, employers, and policymakers can actually use.
+  <img src="./assets/readme/hero.svg" width="100%" alt="CareProof turns the paperwork of unpaid caregiving into a CareScore out of 1000, a rupee value and a portfolio. The 1000 points split into 400 for responsibility, 350 for consistency and 250 for complexity. Winner of the Lovable × Anthropic Buildathon, March 2026.">
 </p>
 
 <p align="center">
-  <img alt="React" src="https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=white" />
-  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white" />
-  <img alt="Vite" src="https://img.shields.io/badge/Vite-5-646CFF?style=flat-square&logo=vite&logoColor=white" />
-  <img alt="Supabase" src="https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat-square&logo=supabase&logoColor=white" />
-  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind-CSS-0EA5E9?style=flat-square&logo=tailwindcss&logoColor=white" />
-  <img alt="Tests" src="https://img.shields.io/badge/Tests-Vitest-6E9F18?style=flat-square&logo=vitest&logoColor=white" />
+  <a href="https://care-proof.lovable.app"><strong>Open the live app</strong></a> ·
+  <a href="#how-the-carescore-is-calculated">How the score is calculated</a> ·
+  <a href="#run-it-locally">Run it locally</a>
 </p>
 
----
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/readme/live-landing-dark.png">
+  <img src="./assets/readme/live-landing-light.png" width="100%" alt="The CareProof landing page at care-proof.lovable.app: the headline Turn invisible care into visible economic power, a short explanation and a Get My Free CareScore button">
+</picture>
 
-## ✨ What It Does
+<sub>This is the landing page you'll see at care-proof.lovable.app, in whichever theme your GitHub uses. Sign in with Google and you get the upload flow and the dashboard.</sub>
 
-Millions of caregivers — those who look after elderly parents, children with special needs, or family members recovering from illness — spend thousands of hours each year doing work that the formal economy completely ignores. That gap means no credit history from it, no proof of professional skills, and no route to re-enter the workforce without explaining a "career gap."
+## What it does
 
-**CareProof fixes that.**
+If you look after an ageing parent or a sick child, you're putting in hours of skilled work every week, and none of it shows up on your CV or a loan application. CareProof takes the papers that work leaves behind (a discharge summary, a school report card, an electricity bill) and turns them into numbers someone else can check. A bank can read a score out of 1000. It can't read a career gap.
 
-| Feature | Description |
-|---|---|
-| 🔴 **CareScore (0–1000)** | A single metric capturing responsibility, consistency, and complexity of caregiving |
-| 💛 **Economic Valuation** | Live INR valuation using India's Replacement Cost Methodology |
-| 📋 **Verified Portfolio** | Professional, printable document replacing "career gap" with verified caregiving tenure |
-| 🌏 **Community Layer** | Real aggregate stats showing caregivers they're part of a growing movement |
-| 🔐 **Private by Default** | You control verification and sharing; data is encrypted and never sold |
+You upload a file (PDF, JPG, PNG, WEBP or HEIC, up to 10 MB), check the care entry CareProof reads from it, and save it. The database then recalculates everything in this table:
 
----
+| Output | What you see | Where it is stored |
+|---|---|---|
+| CareScore | A number from 0 to 1000 on the dashboard gauge | `care_scores`, written by a trigger |
+| Economic value | Daily, monthly and lifetime value in rupees | `care_valuations`, hours × ₹450 |
+| Portfolio | Your entries as a printable page of skills and tenure | built from `care_entries`, printed from the browser |
+| Community stats | Caregiver count, total hours and total value across the platform | `community_stats`, readable by anyone |
 
-## 🏗 Architecture
+Each upload becomes one row in `care_entries` (activity, date, hours, skills, care type, evidence file). The file itself goes to a private storage bucket, `care-evidence`, in a folder named after your user id.
 
-```
-care-proof/
-├── src/
-│   ├── pages/               # Route-level pages (Index, Auth, Upload, Dashboard, ...)
-│   ├── components/          # Reusable UI components + shadcn/ui library
-│   │   └── ui/              # 51 shadcn/ui primitives
-│   ├── hooks/
-│   │   └── useCareData.ts   # All Supabase queries (react-query)
-│   ├── services/
-│   │   └── documentAnalysis.ts  # Document classification engine (AI integration point)
-│   ├── integrations/
-│   │   ├── supabase/        # Supabase client + TypeScript types
-│   │   └── lovable/         # Lovable OAuth proxy
-│   └── index.css            # Global design tokens + Tailwind
-├── supabase/
-│   └── migrations/          # SQL migrations (run in Supabase SQL editor)
-└── public/                  # Static assets
-```
+## How the CareScore is calculated
 
-### Tech Stack
+<p align="center">
+  <img src="./assets/readme/carescore-flow.svg" width="100%" alt="Worked example. discharge_summary.pdf becomes Medical and Hospital Care Coordination, 6 hours, February. school_report_card.pdf becomes Child Education Support, 3 hours, March. electricity_bill.jpg becomes Household Financial Management, 2 hours, March. The trigger computes responsibility 19 of 400, consistency 90 of 350, complexity 160 of 250: a CareScore of 269 out of 1000 and a value of 11 hours × ₹450 = ₹4,950.">
+</p>
 
-| Layer | Technology |
-|---|---|
-| Framework | Vite + React 18 + TypeScript |
-| Styling | Tailwind CSS v3 + CSS custom properties |
-| UI Components | shadcn/ui (Radix UI primitives) |
-| Animation | Framer Motion |
-| 3D Globe | Three.js via @react-three/fiber + @react-three/drei |
-| Auth | Supabase Auth + Google OAuth |
-| Database | Supabase (PostgreSQL) |
-| State / Cache | @tanstack/react-query |
-| Routing | react-router-dom v6 |
-| Forms | react-hook-form + zod |
-| Typography | Outfit (headings) + Plus Jakarta Sans (body) |
+Your score is computed in Postgres, not in the browser. There's no backend code. Every time you add, edit or delete an entry, the trigger `recalculate_user_metrics()` rebuilds your score and value from all of your entries in `care_entries`:
 
----
+| Part | Rule | Cap |
+|---|---|---|
+| Responsibility | total hours × 1.8, rounded down | 400 |
+| Consistency | distinct months with at least one entry × 45 | 350 |
+| Complexity | distinct skills across all entries × 20 | 250 |
 
-## 🗄 Database Schema
+The value uses the replacement cost method: what you'd have to pay someone else for the same hours. The rate's ₹450 an hour (`v_hourly_rate` in the migration). Monthly value is lifetime value divided by the months you've been active; daily value divides by active days.
 
-```sql
-care_entries      — individual caregiving activities (hours, skills, evidence files)
-care_scores       — computed CareScore per user (auto-updated by trigger)
-care_valuations   — economic INR valuation per user (auto-updated by trigger)
-community_stats   — platform-wide aggregate stats (auto-updated by trigger)
-```
+**Current limit:** the upload step doesn't read what's inside the file yet. `src/services/documentAnalysis.ts` matches the file name against 8 patterns (`discharge`, `school`, `bill`, `therapy`, `pharmacy` and others), takes the first match, and falls back to a generic 2-hour entry. A photo named `IMG_2041.jpg` is logged as 2 hours of Caregiving Support Activity. The example above uses those exact rules, so you can reproduce it. [Swapping in a real parser](#plugging-in-real-document-parsing) means replacing one function.
 
-Scores and valuations are calculated automatically via a PostgreSQL trigger every time a care entry is created, updated, or deleted — no server-side code required.
+## Run it locally
 
-**Score Formula:**
-- `Responsibility` (max 400 pts) = hours × 1.8
-- `Consistency` (max 350 pts) = distinct months × 45
-- `Complexity` (max 250 pts) = unique skills × 20
+You'll need [Node.js](https://nodejs.org/) 18 or newer and a [Supabase](https://supabase.com) project with Google sign-in turned on.
 
-**Valuation Method:** India Replacement Cost — `hours × ₹450/hr` (configurable)
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) ≥ 18
-- A [Supabase](https://supabase.com) project with Google OAuth enabled
-
-### 1 — Clone & Install
+**1. Clone and install**
 
 ```bash
-git clone https://github.com/your-username/care-proof.git
+git clone https://github.com/https-shubhamsahu/care-proof.git
 cd care-proof
 npm install
 ```
 
-### 2 — Set Up Environment Variables
-
-Create a `.env` file at the project root (never commit this file):
+**2. Add your Supabase keys.** Copy `.env.example` to `.env` and fill in the values from Supabase → **Settings → API**:
 
 ```env
 VITE_SUPABASE_URL=https://your-project.supabase.co
@@ -120,68 +68,49 @@ VITE_SUPABASE_PUBLISHABLE_KEY=your-anon-public-key
 VITE_SUPABASE_PROJECT_ID=your-project-id
 ```
 
-Find these in your Supabase project → **Settings → API**.
+**3. Create the database.** In Supabase → **SQL Editor**, paste and run `supabase/migrations/20260308_initial_schema.sql`. It creates the four tables, the row-level security policies, the trigger and the storage bucket.
 
-### 3 — Run the Database Migration
+**4. Turn on Google sign-in.** In Supabase → **Authentication → Providers → Google**, enable Google, paste your Google OAuth credentials, and add `http://localhost:5173` to the allowed redirect URLs.
 
-1. Open your Supabase project → **SQL Editor**
-2. Paste and run the contents of `supabase/migrations/20260308_initial_schema.sql`
+> Deploying through Lovable? The `@lovable.dev/cloud-auth-js` proxy handles the OAuth redirect for you.
 
-This creates all tables, RLS policies, triggers, and the storage bucket.
-
-### 4 — Configure Google OAuth
-
-1. Go to Supabase → **Authentication → Providers → Google**
-2. Enable Google and paste your Google OAuth credentials
-3. Add `http://localhost:5173` to the allowed redirect URLs
-
-> **Using Lovable?** The `@lovable.dev/cloud-auth-js` proxy handles OAuth automatically when deployed via Lovable.
-
-### 5 — Start Development Server
+**5. Start the dev server**
 
 ```bash
 npm run dev
 ```
 
-Visit [http://localhost:5173](http://localhost:5173)
+Then open [http://localhost:5173](http://localhost:5173).
 
----
+### Scripts
 
-## 📜 Available Scripts
-
-| Command | Description |
+| Command | What it does |
 |---|---|
-| `npm run dev` | Start Vite dev server with HMR |
+| `npm run dev` | Vite dev server with hot reload |
 | `npm run build` | Production build |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | ESLint with TypeScript rules |
-| `npm run test` | Run Vitest unit tests |
-| `npm run test:watch` | Run tests in watch mode |
+| `npm run build:dev` | Build in development mode |
+| `npm run preview` | Serve the production build locally |
+| `npm run lint` | ESLint with the TypeScript rules |
+| `npm run test` | Run the Vitest tests once |
+| `npm run test:watch` | Run the tests in watch mode |
 
----
+### Routes
 
-## 🛣 Pages & Routes
-
-| Route | Access | Description |
+| Route | Access | Page |
 |---|---|---|
-| `/` | Public | Landing page — hero, how it works, features, FAQ |
+| `/` | Public | Landing page: how it works, features, FAQ |
 | `/auth` | Public | Google sign-in |
-| `/upload` | 🔒 Protected | Upload care evidence → AI analysis → save to DB |
-| `/dashboard` | 🔒 Protected | CareScore gauge, economic value, timeline, portfolio |
-| `/future-security` | 🔒 Protected | Lifetime valuation, transferable skills, career readiness |
-| `/community` | 🔒 Protected | Platform-wide stats, caregiver spotlight, 3D globe |
+| `/upload` | Signed in | Upload a document, review the parsed entry, save it |
+| `/dashboard` | Signed in | CareScore gauge, economic value, timeline, portfolio |
+| `/future-security` | Signed in | Lifetime value, transferable skills, career readiness |
+| `/community` | Signed in | Platform-wide stats, caregiver spotlight, 3D globe |
 
----
+## Plugging in real document parsing
 
-## 🧠 Adding Real AI Document Parsing
-
-The upload flow uses a heuristic filename classifier by default. To integrate a real AI:
-
-1. Open `src/services/documentAnalysis.ts`
-2. Replace the body of `analyseDocument(file: File)` with your AI/OCR call:
+`Upload.tsx` only cares about the shape `analyseDocument(file)` returns, so you can swap the file-name rules for a real AI or OCR call without touching anything else. Open `src/services/documentAnalysis.ts` and replace the body:
 
 ```typescript
-// Example: Google Gemini Vision API
+// Example: send the file to your own endpoint (Gemini Vision, Textract, ...)
 export async function analyseDocument(file: File): Promise<ExtractedEntryWithDate> {
   const formData = new FormData();
   formData.append("file", file);
@@ -201,73 +130,100 @@ export async function analyseDocument(file: File): Promise<ExtractedEntryWithDat
 }
 ```
 
-The interface exposed to `Upload.tsx` stays identical — no other files need to change.
+## Security
 
----
+- Row-level security is on for all four tables. You can only read and write your own entries, score and valuation; `community_stats` is the one table anyone can read.
+- Evidence files live in the private `care-evidence` bucket, and storage policies only let you upload, view and delete files inside your own folder.
+- Sign-in is Google OAuth through Supabase Auth.
+- Your keys belong in a local `.env`; start from `.env.example`.
 
-## 🎨 Design System
+<details>
+<summary><strong>Project layout and stack</strong></summary>
 
-### Colour Palette
+```
+care-proof/
+├── src/
+│   ├── pages/               # Route-level pages (Index, Auth, Upload, Dashboard, ...)
+│   ├── components/          # App components + shadcn/ui library
+│   │   └── ui/              # shadcn/ui primitives
+│   ├── hooks/
+│   │   └── useCareData.ts   # All Supabase queries (react-query)
+│   ├── services/
+│   │   └── documentAnalysis.ts  # Document classifier (AI integration point)
+│   ├── integrations/
+│   │   ├── supabase/        # Supabase client + TypeScript types
+│   │   └── lovable/         # Lovable OAuth proxy
+│   └── index.css            # Design tokens + Tailwind
+├── supabase/
+│   └── migrations/          # SQL migration (run in the Supabase SQL editor)
+└── public/                  # Static assets
+```
 
-| Token | Light | Dark | Usage |
+| Layer | Technology |
+|---|---|
+| Framework | Vite + React 18 + TypeScript |
+| Styling | Tailwind CSS v3 + CSS custom properties |
+| UI components | shadcn/ui (Radix UI primitives) |
+| Animation | Framer Motion |
+| 3D globe | Three.js via @react-three/fiber + @react-three/drei |
+| Auth | Supabase Auth + Google OAuth |
+| Database | Supabase (PostgreSQL) |
+| State and cache | @tanstack/react-query |
+| Routing | react-router-dom v6 |
+| Forms | react-hook-form + zod |
+| Typography | Outfit (headings) + Plus Jakarta Sans (body) |
+
+</details>
+
+<details>
+<summary><strong>Design tokens</strong></summary>
+
+The three brand colours are HSL custom properties in `src/index.css`, each with a light and a dark value.
+
+| Token | Light | Dark | Used for |
 |---|---|---|---|
-| `--primary` / `--terracotta` | Warm coral `#D97B7B` | Lighter coral | Brand, CTAs |
-| `--gold` | Amber `#F2B53A` | Soft amber | Economic value, premium UI |
-| `--verified` | Sage green `#7EB862` | Lighter sage | Trust badges, verification |
-
-### Key CSS Classes
+| `--primary` / `--terracotta` | `4 62% 68%` | `4 55% 72%` | Brand, buttons, the CareScore gauge |
+| `--gold` | `42 90% 62%` | `42 80% 70%` | Rupee values |
+| `--verified` | `100 38% 56%` | `100 40% 64%` | Verification badges |
 
 ```css
-.glass-card       /* Frosted-glass card with backdrop-blur */
-.glow-primary     /* Terracotta ambient glow shadow */
-.glow-gold        /* Gold ambient glow shadow */
-.glow-verified    /* Sage green ambient glow shadow */
+.glass-card       /* Frosted card with backdrop-blur */
+.glow-primary     /* Terracotta ambient glow */
+.glow-gold        /* Gold ambient glow */
+.glow-verified    /* Sage green ambient glow */
 .text-gradient-primary / .text-gradient-gold / .text-gradient-verified
 .font-heading     /* Outfit typeface */
 ```
 
----
+`scripts/build_readme_assets.py` draws the README graphics from the dark values, so if you change a token, rerun it.
 
-## 🔒 Security
+</details>
 
-- **Row-Level Security** is enabled on all Supabase tables — users can only read/write their own data
-- **Storage policies** restrict evidence files to the uploading user's folder
-- **`.env` is git-ignored** — never commits secrets
-- **OAuth tokens** are managed by Supabase and never stored in application state longer than necessary
+## Roadmap
 
----
+- [ ] Real AI document parsing (Gemini Vision or AWS Textract)
+- [ ] PDF portfolio export (react-pdf or server-side Puppeteer)
+- [ ] Shareable portfolio links with per-link access control
+- [ ] Email notifications when a care entry is verified
+- [ ] Recurring care templates (for example "Daily elder care, 2 hrs")
+- [ ] Hindi, Tamil and Telugu
+- [ ] Lender API: a standard format for partner banks and NBFCs
+- [ ] Progressive Web App (offline uploads, mobile camera)
 
-## 🗺 Roadmap
-
-- [ ] **Real AI document parsing** (Gemini Vision / AWS Textract integration)
-- [ ] **PDF portfolio export** (react-pdf or Puppeteer server-side)
-- [ ] **Shareable portfolio links** with granular access control
-- [ ] **Email notifications** when a care entry is verified
-- [ ] **Recurring care templates** (e.g. "Daily elder care — 2 hrs")
-- [ ] **Multi-language support** (Hindi, Tamil, Telugu)
-- [ ] **Lender API** — standardised format for partner banks/NBFCs
-- [ ] **Progressive Web App** (offline uploads, mobile camera support)
-
----
-
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feat/my-feature`
 3. Commit your changes: `git commit -m "feat: add my feature"`
 4. Push to the branch: `git push origin feat/my-feature`
-5. Open a Pull Request
+5. Open a pull request
 
-Please follow the existing code style (TypeScript strict, Tailwind classes over inline styles, react-query for all async data).
+Please follow the existing code style: strict TypeScript, Tailwind classes over inline styles, react-query for all async data.
 
----
-
-## 📄 License
+## License
 
 No `LICENSE` file is currently present in this repository. Add one (e.g. MIT) to make usage terms explicit.
 
 ---
 
-<p align="center">
-  Built with ❤️ for the 450 million unpaid caregivers in India whose work deserves to be seen.
-</p>
+Questions: [shubhamsahu@nosus.foo](mailto:shubhamsahu@nosus.foo)

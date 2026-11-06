@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="t d">
+  <title id="t">CareProof</title>
+  <desc id="d">CareProof turns the paperwork of unpaid caregiving into a CareScore out of 1000, a rupee valuation and a portfolio. The ring shows how the 1000 points split: 400 for responsibility, 350 for consistency, 250 for complexity. Winner of the Lovable x Anthropic Buildathon, March 2026.</desc>
+  <rect width="1200" height="460" rx="24" fill="#15110e"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+    <text x="64" y="150" font-size="88" font-weight="700" fill="#eee8e2" letter-spacing="-1.5">CareProof</text>
+    <text x="66" y="214" font-size="25" fill="#eee8e2">Turns hospital notes, school reports and bills</text>
+    <text x="66" y="250" font-size="25" fill="#eee8e2">into a CareScore out of 1000, a rupee value</text>
+    <text x="66" y="286" font-size="25" fill="#eee8e2">and a portfolio for lenders and employers.</text>
+    <line x1="66" y1="330" x2="600" y2="330" stroke="#3a302a" stroke-width="2"/>
+    <circle cx="76" cy="370" r="7" fill="#f0cb75"/>
+    <text x="94" y="377" font-size="21" fill="#eee8e2">Won the Lovable × Anthropic Buildathon, March 2026</text>
+    <text x="66" y="414" font-size="18" fill="#b4a79e" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans Mono', monospace">React 18 · Supabase Postgres · care-proof.lovable.app</text>
+  </g>
+  <g id="ring">
+    <circle cx="800" cy="232" r="116" stroke="#201b18" stroke-width="40" fill="none"/>
+    <path d="M804.45 116.09 A116 116 0 0 1 871.74 323.16" stroke="#e0918a" stroke-width="26" fill="none"/><path d="M864.53 328.39 A116 116 0 0 1 684.09 236.45" stroke="#f0cb75" stroke-width="26" fill="none"/><path d="M684.09 227.55 A116 116 0 0 1 795.55 116.09" stroke="#97c87e" stroke-width="26" fill="none"/>
+    <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" text-anchor="middle">
+      <text x="800" y="240" font-size="50" font-weight="700" fill="#eee8e2">1000</text>
+      <text x="800" y="272" font-size="18" fill="#b4a79e">CareScore points</text>
+    </g>
+  </g>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif"><text x="972" y="148" font-size="34" font-weight="700" fill="#e0918a">400</text><text x="972" y="178" font-size="20" fill="#eee8e2">Responsibility</text><text x="972" y="240" font-size="34" font-weight="700" fill="#f0cb75">350</text><text x="972" y="270" font-size="20" fill="#eee8e2">Consistency</text><text x="972" y="332" font-size="34" font-weight="700" fill="#97c87e">250</text><text x="972" y="362" font-size="20" fill="#eee8e2">Complexity</text></g>
+</svg>
